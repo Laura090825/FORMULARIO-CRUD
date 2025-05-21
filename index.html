@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Restaurante</title>
+  <style>
+    * {
+      font-family: Arial, sans-serif;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      background: url('https://img.freepik.com/fotos-premium/fondo-restaurante-lujo-borroso_776741-381.jpg') center/cover fixed;
+    }
+
+    h1 {
+      text-align: center;
+      color: #681788;
+    }
+
+    input,
+    button {
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    #mesas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      justify-content: center;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    #divCard {
+      padding: 15px;
+      border-radius: 15px;
+      width: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+      color: #000;
+      background-color: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(5px);
+    }
+
+    #divCard:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .libre {
+      background-color: #ffffff !important;
+    }
+
+    .ocupada {
+      background-color: #948fe6 !important;
+    }
+
+    .reservada {
+      background-color: #00ccaa !important;
+    }
+
+    #mesa {
+      height: 120px;
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-text {
+      text-align: center;
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .card-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .card-buttons button {
+      background-color: rgba(255, 255, 255, 0.2);
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 18px;
+      transition: background-color 0.2s;
+      cursor: pointer;
+    }
+
+    .card-buttons button:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .busqueda {
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      max-width: 400px;
+      margin: 20px auto;
+    }
+
+    select,
+    .estado {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid black;
+    }
+
+    #resultadoBusqueda {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    button {
+      cursor: pointer;
+      background-color: #9d3ec6;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      transition: background-color 0.2s;
+      gap: 10px;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #6738a5;
+    }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-contenido {
+      background-color: #fff;
+      margin: 100px auto;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 420px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .cerrar {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #666;
+    }
+
+    .titulo {
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      color: #681788;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 10px 20px;
+      border-radius: 10px;
+      backdrop-filter: blur(3px);
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>RESTAURANTE LAS FLÓREZ</h1>
+
+  <div style="text-align: center; margin: 20px;">
+    <button onclick="abrirModal()">➕ Registrar Mesa</button>
+  </div>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal">
+    <div class="formulario modal-contenido">
+      <div class="titulo"><h1>RESTAURANTE LAS FLÓREZ</h1></div>
+      <span class="cerrar" onclick="cerrarModal()">✖</span>
+      <input type="text" id="nro" placeholder="Número de mesa" />
+      <input type="text" id="descripcion" placeholder="Descripción" />
+      <input type="text" id="personas" placeholder="Capacidad de personas" />
+      <select id="estado">
+        <option value="libre">Libre</option>
+        <option value="ocupada">Ocupada</option>
+        <option value="reservada">Reservada</option>
+      </select>
+      <button id="registrar">Guardar Mesa</button>
+    </div>
+  </div>
+
+  <div class="busqueda" style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;">
+  <input type="text" id="buscarNumero" placeholder="Consultar estado mesa N°" />
+  <button onclick="consultarEstado()">Buscar Estado</button>
+  <button id="cerrarResultado" onclick="cerrarResultado()" style="display: none;">❌</button>
+</div>
+<p id="resultadoBusqueda" style="text-align: center; margin-top: 10px;"></p>
+
+  </div>
+
+  <!-- Nueva búsqueda con lupa y cerrar -->
+  <div class="busqueda">
+    <input type="text" id="filtroMesa" placeholder="Filtrar mesa N°" />
+    <button onclick="mostrarUnaMesa()" title="Buscar Mesa">🔍</button>
+    <button onclick="mostrarTodas()" id="btnMostrarTodas" style="display: none;" title="Mostrar todas las mesas">❌</button>
+  </div>
+
+  <div id="mesas"></div>
+
+  <script>
+    let datosMesa = [];
+    let modo = 0;
+    let numMesa = "";
+
+    document.getElementById("registrar").addEventListener("click", () => {
+      if (modo == 0) {
+        guardarMesa();
+      } else {
+        editarMesa();
+      }
+    });
+
+    function abrirModal() {
+      document.getElementById("modal").style.display = "block";
+    }
+
+    function cerrarModal() {
+      document.getElementById("modal").style.display = "none";
+      limpiar();
+      modo = 0;
+      document.getElementById("registrar").textContent = "Guardar Mesa";
+    }
+
+    window.onclick = function (event) {
+      const modal = document.getElementById("modal");
+      if (event.target == modal) {
+        cerrarModal();
+      }
+    }
+
+    function guardarMesa() {
+      const nro = document.getElementById("nro").value.trim();
+      const descripcion = document.getElementById("descripcion").value.trim();
+      const personas = document.getElementById("personas").value.trim();
+      const estado = document.getElementById("estado").value.trim();
+
+      if (!nro || !descripcion || !personas || !estado) {
+        alert("Por favor complete todos los campos.");
+        return;
+      }
+
+      if (datosMesa.some((m) => m.numero === nro)) {
+        alert("La mesa ya existe.");
+        return;
+      }
+
+      datosMesa.unshift({ numero: nro, descripcion, personas, estado });
+      alert("Registro exitoso");
+      cerrarModal();
+      pintarMesas();
+    }
+
+    function limpiar() {
+      document.getElementById("nro").value = "";
+      document.getElementById("descripcion").value = "";
+      document.getElementById("personas").value = "";
+      document.getElementById("estado").value = "libre";
+    }
+
+    function editarMesa() {
+      const indice = datosMesa.findIndex((it) => it.numero == numMesa);
+      datosMesa[indice].numero = document.getElementById("nro").value;
+      datosMesa[indice].descripcion = document.getElementById("descripcion").value;
+      datosMesa[indice].personas = document.getElementById("personas").value;
+      datosMesa[indice].estado = document.getElementById("estado").value;
+      pintarMesas();
+      cerrarModal();
+    }
+
+    function pintarMesas(lista = datosMesa) {
+      const contenedor = document.getElementById("mesas");
+      contenedor.textContent = "";
+
+      lista.forEach((item) => {
+        const divCard = document.createElement("div");
+        divCard.id = "divCard";
+        divCard.classList.add(item.estado);
+
+        const imagen = document.createElement("img");
+        imagen.id = "mesa";
+        imagen.src = "https://img.freepik.com/fotos-premium/mesa-restaurante-desenfoque-fondo_410516-18695.jpg";
+
+        const numero = document.createElement("p");
+        numero.className = "card-text";
+        numero.textContent = "Mesa N°: " + item.numero;
+
+        const descripcion = document.createElement("p");
+        descripcion.className = "card-text";
+        descripcion.textContent = "Descripción: " + item.descripcion;
+
+        const personas = document.createElement("p");
+        personas.className = "card-text";
+        personas.textContent = "Capacidad: " + item.personas + " Personas";
+
+        const btnEditar = document.createElement("button");
+        btnEditar.textContent = "📝";
+        btnEditar.title = "Editar";
+        btnEditar.onclick = () => {
+          abrirModal();
+          document.getElementById("nro").value = item.numero;
+          document.getElementById("descripcion").value = item.descripcion;
+          document.getElementById("personas").value = item.personas;
+          document.getElementById("estado").value = item.estado;
+          document.getElementById("registrar").textContent = "Editar Mesa";
+          modo = 1;
+          numMesa = item.numero;
+        };
+
+        const btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "❌";
+        btnEliminar.title = "Eliminar";
+        btnEliminar.onclick = () => {
+          const index = datosMesa.findIndex((m) => m.numero === item.numero);
+          datosMesa.splice(index, 1);
+          pintarMesas();
+        };
+
+        const btnGroup = document.createElement("div");
+        btnGroup.className = "card-buttons";
+        btnGroup.append(btnEditar, btnEliminar);
+
+        divCard.append(imagen, numero, descripcion, personas, btnGroup);
+        contenedor.appendChild(divCard);
+      });
+    }
+
+    function consultarEstado() {
+  const numero = document.getElementById("buscarNumero").value.trim();
+  const resultado = document.getElementById("resultadoBusqueda");
+  const cerrarBtn = document.getElementById("cerrarResultado");
+
+  if (!numero) {
+    resultado.textContent = "Por favor ingrese un número de mesa.";
+    resultado.style.color = "orange";
+    cerrarBtn.style.display = "inline";
+    return;
+  }
+
+  const mesa = datosMesa.find((m) => m.numero === numero);
+  if (!mesa) {
+    resultado.textContent = `⚠️ La mesa N°${numero} no existe.`;
+    resultado.style.color = "gray";
+  } else {
+    resultado.textContent = `Mesa N°${numero} - Estado: ${mesa.estado}`;
+    resultado.style.color = "black";
+  }
+  cerrarBtn.style.display = "inline";
+}
+
+
+    function mostrarUnaMesa() {
+      const numero = document.getElementById("filtroMesa").value.trim();
+      const contenedor = document.getElementById("mesas");
+      const btnMostrarTodas = document.getElementById("btnMostrarTodas");
+
+      contenedor.textContent = "";
+
+      const mesa = datosMesa.find((m) => m.numero === numero);
+      if (!mesa) {
+        contenedor.innerHTML = `<p style="color: gray; font-weight: bold;">⚠️ La mesa N°${numero} no existe.</p>`;
+        btnMostrarTodas.style.display = "inline-block";
+        return;
+      }
+
+      pintarMesas([mesa]);
+      btnMostrarTodas.style.display = "inline-block";
+    }
+
+    function mostrarTodas() {
+      pintarMesas();
+      document.getElementById("btnMostrarTodas").style.display = "none";
+      document.getElementById("filtroMesa").value = "";
+    }
+    function cerrarResultado() {
+  document.getElementById("resultadoBusqueda").textContent = "";
+  document.getElementById("cerrarResultado").style.display = "none";
+}
+
+  </script>
+</body>
+</html>
