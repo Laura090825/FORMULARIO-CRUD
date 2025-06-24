@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Restaurante</title>
+  <title>Restaurante Las Flórez</title>
   <style>
+    /* Estilos base, reinicios y tipografía */
     * {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna y legible */
       box-sizing: border-box;
     }
 
@@ -14,113 +15,39 @@
       margin: 0;
       padding: 20px;
       background: url('https://img.freepik.com/fotos-premium/fondo-restaurante-lujo-borroso_776741-381.jpg') center/cover fixed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      color: #333; /* Texto más oscuro para mejor lectura en fondos claros */
     }
 
     h1 {
       text-align: center;
       color: #681788;
+      font-size: 2.5em; /* Título más grande */
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sutil sombra de texto */
     }
 
+    /* Elementos de formulario (inputs, botones, select) */
     input,
-    button {
-      padding: 10px;
-      font-size: 16px;
+    button,
+    select {
+      padding: 12px 15px; /* Más padding */
+      font-size: 17px; /* Fuente ligeramente más grande */
+      border: 1px solid #ccc; /* Borde más claro */
+      border-radius: 8px; /* Bordes más redondeados */
+      transition: all 0.3s ease; /* Transiciones suaves para interacciones */
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra interior para profundidad */
     }
 
-    #mesas {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      justify-content: center;
-      padding: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    #divCard {
-      padding: 15px;
-      border-radius: 15px;
-      width: 260px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s, box-shadow 0.3s;
-      color: #000;
-      background-color: rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(5px);
-    }
-
-    #divCard:hover {
-      transform: scale(1.03);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .libre {
-      background-color: #ffffff !important;
-    }
-
-    .ocupada {
-      background-color: #948fe6 !important;
-    }
-
-    .reservada {
-      background-color: #00ccaa !important;
-    }
-
-    #mesa {
-      height: 120px;
-      width: 100%;
-      border-radius: 10px;
-      object-fit: cover;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-    }
-
-    .card-text {
-      text-align: center;
-      margin: 0;
-      font-weight: bold;
-    }
-
-    .card-buttons {
-      display: flex;
-      gap: 10px;
-    }
-
-    .card-buttons button {
-      background-color: rgba(255, 255, 255, 0.2);
-      border: none;
-      padding: 8px 12px;
-      border-radius: 5px;
-      color: #fff;
-      font-size: 18px;
-      transition: background-color 0.2s;
-      cursor: pointer;
-    }
-
-    .card-buttons button:hover {
-      background-color: rgba(255, 255, 255, 0.4);
-    }
-
-    .busqueda {
-      gap: 10px;
-      justify-content: center;
-      align-items: center;
-      max-width: 400px;
-      margin: 20px auto;
-    }
-
-    select,
-    .estado {
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid black;
-    }
-
-    #resultadoBusqueda {
-      text-align: center;
-      margin-top: 10px;
+    input:focus,
+    select:focus,
+    button:focus {
+      outline: none;
+      border-color: #9d3ec6; /* Resalta el borde al enfocar */
+      box-shadow: 0 0 0 3px rgba(157, 62, 198, 0.3); /* Efecto de brillo al enfocar */
     }
 
     button {
@@ -128,14 +55,161 @@
       background-color: #9d3ec6;
       border: none;
       color: white;
-      border-radius: 5px;
-      transition: background-color 0.2s;
-      gap: 10px;
       font-weight: bold;
+      letter-spacing: 0.5px; /* Espaciado de letras ligeramente mayor */
+      text-transform: uppercase; /* Mayúsculas para los botones */
     }
 
     button:hover {
       background-color: #6738a5;
+      transform: translateY(-2px); /* Ligero levantamiento al pasar el ratón */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra al pasar el ratón */
+    }
+
+    /* Contenedor principal de la cuadrícula de mesas */
+    #mesas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Minmax ajustado para tarjetas ligeramente más grandes */
+      gap: 25px; /* Espacio aumentado */
+      justify-content: center;
+      padding: 20px;
+      max-width: 1300px; /* Contenedor más ancho */
+      width: 100%;
+      margin: 30px auto; /* Más margen */
+    }
+
+    /* Estilo de la tarjeta de mesa individual */
+    #divCard {
+      padding: 20px; /* Más padding dentro de la tarjeta */
+      border-radius: 20px; /* Más redondeado */
+      width: 100%; /* Ocupa el 100% del espacio en la columna */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px; /* Espacio entre elementos de la tarjeta */
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); /* Sombra más pronunciada para profundidad */
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+      color: #333; /* Color de texto predeterminado */
+      background-color: rgba(255, 255, 255, 0.85); /* Fondo semitransparente blanco */
+      backdrop-filter: blur(8px); /* Filtro de desenfoque más fuerte */
+      border: 1px solid rgba(255, 255, 255, 0.3); /* Borde sutil */
+    }
+
+    #divCard:hover {
+      transform: translateY(-5px) scale(1.02); /* Efecto de levantamiento y ligero aumento */
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35); /* Sombra más intensa al pasar el ratón */
+    }
+
+    /* Clases para los estados de la mesa */
+    .libre {
+      background-color: #e6ffe6 !important; /* Verde claro */
+      border-color: #00ccaa !important;
+      color: #1a7e6a; /* Texto oscuro para contraste */
+    }
+
+    .ocupada {
+      background-color: #ffe6e6 !important; /* Rojo claro */
+      border-color: #948fe6 !important;
+      color: #6a1a7e; /* Texto oscuro para contraste */
+    }
+
+    .reservada {
+      background-color: #e6f7ff !important; /* Azul claro */
+      border-color: #00ccaa !important;
+      color: #1a6a7e; /* Texto oscuro para contraste */
+    }
+
+    /* Imagen de la mesa */
+    #mesa {
+      height: 150px; /* Altura ligeramente mayor */
+      width: calc(100% - 20px); /* Ancho ajustado con margen */
+      border-radius: 12px; /* Más redondeado */
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para la imagen */
+      margin-bottom: 5px;
+    }
+
+    /* Texto de la tarjeta */
+    .card-text {
+      text-align: center;
+      margin: 5px 0; /* Margen vertical */
+      font-weight: 600; /* Negrita más suave */
+      font-size: 1.1em; /* Texto ligeramente más grande */
+      color: inherit; /* Hereda el color de texto de la tarjeta */
+    }
+
+    /* Botones de acción en la tarjeta */
+    .card-buttons {
+      display: flex;
+      gap: 15px; /* Más espacio entre botones */
+      margin-top: 10px; /* Margen superior */
+    }
+
+    .card-buttons button {
+      background-color: rgba(157, 62, 198, 0.7); /* Botones semitransparentes del color principal */
+      border: none;
+      padding: 10px 15px; /* Más padding */
+      border-radius: 8px; /* Bordes más redondeados */
+      color: #fff;
+      font-size: 1.2em; /* Iconos más grandes */
+      transition: background-color 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-buttons button:hover {
+      background-color: #9d3ec6; /* Color sólido al pasar el ratón */
+      transform: translateY(-2px); /* Ligero levantamiento */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Sección de búsqueda */
+    .busqueda {
+      display: flex;
+      flex-direction: row; /* Asegura que estén en fila */
+      align-items: center;
+      justify-content: center;
+      gap: 15px; /* Espacio entre elementos de búsqueda */
+      max-width: 600px; /* Ancho máximo para la sección de búsqueda */
+      margin: 25px auto; /* Más margen */
+      padding: 15px;
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 15px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    }
+
+    .busqueda input {
+      flex-grow: 1; /* Permite que el input crezca */
+      min-width: 180px; /* Ancho mínimo para el input */
+    }
+
+    /* Resultado de búsqueda */
+    #resultadoBusqueda {
+      text-align: center;
+      margin-top: 15px; /* Más margen superior */
+      font-size: 1.1em;
+      font-weight: bold;
+      padding: 8px 15px;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(3px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      display: inline-block; /* Para que el fondo y el padding se apliquen correctamente */
+    }
+
+    /* Botón de registrar mesa */
+    .body > div:first-of-type button {
+      background-color: #681788; /* Color principal para el botón de registro */
+      font-size: 1.1em;
+      padding: 12px 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .body > div:first-of-type button:hover {
+      background-color: #4b0e60;
+      transform: translateY(-3px);
     }
 
     /* MODAL */
@@ -148,40 +222,60 @@
       width: 100%;
       height: 100%;
       overflow: auto;
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0, 0, 0, 0.7); /* Fondo más oscuro para el modal */
+      animation: fadeIn 0.3s ease-out; /* Animación de entrada */
     }
 
     .modal-contenido {
       background-color: #fff;
-      margin: 100px auto;
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 420px;
+      margin: 80px auto; /* Margen superior ajustado para centrar mejor */
+      padding: 30px; /* Más padding */
+      border-radius: 15px; /* Más redondeado */
+      max-width: 480px; /* Ancho máximo ligeramente mayor */
       position: relative;
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 20px; /* Más espacio entre elementos */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Sombra más profunda para el modal */
+      animation: slideIn 0.3s ease-out; /* Animación de entrada */
     }
 
     .cerrar {
       position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 24px;
+      top: 15px; /* Ajuste de posición */
+      right: 20px; /* Ajuste de posición */
+      font-size: 28px; /* Tamaño de fuente más grande */
       cursor: pointer;
-      color: #666;
+      color: #888; /* Color más suave */
+      transition: color 0.2s ease;
+    }
+
+    .cerrar:hover {
+      color: #333; /* Más oscuro al pasar el ratón */
     }
 
     .titulo {
       text-align: center;
-      font-size: 22px;
+      font-size: 24px; /* Título más grande en el modal */
       font-weight: bold;
       color: #681788;
-      background-color: rgba(255, 255, 255, 0.7);
-      padding: 10px 20px;
-      border-radius: 10px;
-      backdrop-filter: blur(3px);
-      margin-bottom: 10px;
+      background-color: rgba(255, 255, 255, 0.8); /* Fondo más opaco */
+      padding: 15px 25px; /* Más padding */
+      border-radius: 12px; /* Más redondeado */
+      backdrop-filter: blur(4px);
+      margin-bottom: 15px; /* Más margen inferior */
+      border-bottom: 2px solid #681788; /* Línea inferior para el título */
+    }
+
+    /* Animaciones */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
   </style>
 </head>
@@ -193,7 +287,6 @@
     <button onclick="abrirModal()">➕ Registrar Mesa</button>
   </div>
 
-  <!-- MODAL -->
   <div id="modal" class="modal">
     <div class="formulario modal-contenido">
       <div class="titulo"><h1>RESTAURANTE LAS FLÓREZ</h1></div>
@@ -211,15 +304,12 @@
   </div>
 
   <div class="busqueda" style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;">
-  <input type="text" id="buscarNumero" placeholder="Consultar estado mesa N°" />
-  <button onclick="consultarEstado()">Buscar Estado</button>
-  <button id="cerrarResultado" onclick="cerrarResultado()" style="display: none;">❌</button>
-</div>
-<p id="resultadoBusqueda" style="text-align: center; margin-top: 10px;"></p>
-
+    <input type="text" id="buscarNumero" placeholder="Consultar estado mesa N°" />
+    <button onclick="consultarEstado()">Buscar Estado</button>
+    <button id="cerrarResultado" onclick="cerrarResultado()" style="display: none;">❌</button>
   </div>
+  <p id="resultadoBusqueda" style="text-align: center; margin-top: 10px;"></p>
 
-  <!-- Nueva búsqueda con lupa y cerrar -->
   <div class="busqueda">
     <input type="text" id="filtroMesa" placeholder="Filtrar mesa N°" />
     <button onclick="mostrarUnaMesa()" title="Buscar Mesa">🔍</button>
@@ -356,28 +446,27 @@
     }
 
     function consultarEstado() {
-  const numero = document.getElementById("buscarNumero").value.trim();
-  const resultado = document.getElementById("resultadoBusqueda");
-  const cerrarBtn = document.getElementById("cerrarResultado");
+      const numero = document.getElementById("buscarNumero").value.trim();
+      const resultado = document.getElementById("resultadoBusqueda");
+      const cerrarBtn = document.getElementById("cerrarResultado");
 
-  if (!numero) {
-    resultado.textContent = "Por favor ingrese un número de mesa.";
-    resultado.style.color = "orange";
-    cerrarBtn.style.display = "inline";
-    return;
-  }
+      if (!numero) {
+        resultado.textContent = "Por favor ingrese un número de mesa.";
+        resultado.style.color = "orange";
+        cerrarBtn.style.display = "inline";
+        return;
+      }
 
-  const mesa = datosMesa.find((m) => m.numero === numero);
-  if (!mesa) {
-    resultado.textContent = `⚠️ La mesa N°${numero} no existe.`;
-    resultado.style.color = "gray";
-  } else {
-    resultado.textContent = `Mesa N°${numero} - Estado: ${mesa.estado}`;
-    resultado.style.color = "black";
-  }
-  cerrarBtn.style.display = "inline";
-}
-
+      const mesa = datosMesa.find((m) => m.numero === numero);
+      if (!mesa) {
+        resultado.textContent = `⚠️ La mesa N°${numero} no existe.`;
+        resultado.style.color = "gray";
+      } else {
+        resultado.textContent = `Mesa N°${numero} - Estado: ${mesa.estado}`;
+        resultado.style.color = "black";
+      }
+      cerrarBtn.style.display = "inline";
+    }
 
     function mostrarUnaMesa() {
       const numero = document.getElementById("filtroMesa").value.trim();
@@ -403,10 +492,9 @@
       document.getElementById("filtroMesa").value = "";
     }
     function cerrarResultado() {
-  document.getElementById("resultadoBusqueda").textContent = "";
-  document.getElementById("cerrarResultado").style.display = "none";
-}
-
+      document.getElementById("resultadoBusqueda").textContent = "";
+      document.getElementById("cerrarResultado").style.display = "none";
+    }
   </script>
 </body>
 </html>
