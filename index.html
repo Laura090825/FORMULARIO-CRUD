@@ -34,10 +34,10 @@
     input,
     button,
     select {
-      padding: 12px 15px; /* Más padding */
-      font-size: 17px; /* Fuente ligeramente más grande */
+      padding: 10px 12px; /* Reducido un poco el padding */
+      font-size: 16px; /* Ajustado el tamaño de fuente */
       border: 1px solid #ccc; /* Borde más claro */
-      border-radius: 8px; /* Bordes más redondeados */
+      border-radius: 6px; /* Bordes ligeramente menos redondeados para un look más limpio */
       transition: all 0.3s ease; /* Transiciones suaves para interacciones */
       box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra interior para profundidad */
     }
@@ -62,42 +62,42 @@
 
     button:hover {
       background-color: #6738a5;
-      transform: translateY(-2px); /* Ligero levantamiento al pasar el ratón */
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra al pasar el ratón */
+      transform: translateY(-1px); /* Ligero levantamiento al pasar el ratón */
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2); /* Sombra al pasar el ratón */
     }
 
     /* Contenedor principal de la cuadrícula de mesas */
     #mesas {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Minmax ajustado para tarjetas ligeramente más grandes */
-      gap: 25px; /* Espacio aumentado */
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Minmax ajustado para tarjetas más pequeñas */
+      gap: 15px; /* Espacio reducido entre tarjetas */
       justify-content: center;
       padding: 20px;
-      max-width: 1300px; /* Contenedor más ancho */
+      max-width: 1000px; /* Ancho máximo más ajustado */
       width: 100%;
-      margin: 30px auto; /* Más margen */
+      margin: 30px auto; /* Margen */
     }
 
     /* Estilo de la tarjeta de mesa individual */
     #divCard {
-      padding: 20px; /* Más padding dentro de la tarjeta */
-      border-radius: 20px; /* Más redondeado */
+      padding: 15px; /* Reducido el padding dentro de la tarjeta */
+      border-radius: 12px; /* Más redondeado pero no excesivo */
       width: 100%; /* Ocupa el 100% del espacio en la columna */
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px; /* Espacio entre elementos de la tarjeta */
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); /* Sombra más pronunciada para profundidad */
+      gap: 8px; /* Espacio reducido entre elementos de la tarjeta */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra más sutil */
       transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
       color: #333; /* Color de texto predeterminado */
       background-color: rgba(255, 255, 255, 0.85); /* Fondo semitransparente blanco */
-      backdrop-filter: blur(8px); /* Filtro de desenfoque más fuerte */
-      border: 1px solid rgba(255, 255, 255, 0.3); /* Borde sutil */
+      backdrop-filter: blur(6px); /* Filtro de desenfoque */
+      border: 1px solid rgba(255, 255, 255, 0.2); /* Borde más sutil */
     }
 
     #divCard:hover {
-      transform: translateY(-5px) scale(1.02); /* Efecto de levantamiento y ligero aumento */
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35); /* Sombra más intensa al pasar el ratón */
+      transform: translateY(-3px) scale(1.01); /* Efecto de levantamiento y ligero aumento */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra más intensa al pasar el ratón */
     }
 
     /* Clases para los estados de la mesa */
@@ -121,95 +121,94 @@
 
     /* Imagen de la mesa */
     #mesa {
-      height: 150px; /* Altura ligeramente mayor */
-      width: calc(100% - 20px); /* Ancho ajustado con margen */
-      border-radius: 12px; /* Más redondeado */
+      height: 100px; /* Altura más pequeña para un look minimalista */
+      width: calc(100% - 10px); /* Ancho ajustado con margen */
+      border-radius: 8px; /* Más redondeado */
       object-fit: cover;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para la imagen */
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Sombra para la imagen */
       margin-bottom: 5px;
     }
 
     /* Texto de la tarjeta */
     .card-text {
       text-align: center;
-      margin: 5px 0; /* Margen vertical */
-      font-weight: 600; /* Negrita más suave */
-      font-size: 1.1em; /* Texto ligeramente más grande */
-      color: inherit; /* Hereda el color de texto de la tarjeta */
+      margin: 3px 0; /* Margen vertical reducido */
+      font-weight: 600;
+      font-size: 1em; /* Texto ligeramente más pequeño */
+      color: inherit;
     }
 
     /* Botones de acción en la tarjeta */
     .card-buttons {
       display: flex;
-      gap: 15px; /* Más espacio entre botones */
-      margin-top: 10px; /* Margen superior */
+      gap: 10px; /* Más espacio entre botones */
+      margin-top: 5px; /* Margen superior reducido */
     }
 
     .card-buttons button {
-      background-color: rgba(157, 62, 198, 0.7); /* Botones semitransparentes del color principal */
+      background-color: rgba(157, 62, 198, 0.8); /* Botones semitransparentes del color principal */
       border: none;
-      padding: 10px 15px; /* Más padding */
-      border-radius: 8px; /* Bordes más redondeados */
+      padding: 8px 12px; /* Reducido el padding */
+      border-radius: 6px; /* Bordes más redondeados */
       color: #fff;
-      font-size: 1.2em; /* Iconos más grandes */
-      transition: background-color 0.2s ease, transform 0.2s ease;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      font-size: 1.1em; /* Iconos más pequeños */
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
     }
 
     .card-buttons button:hover {
       background-color: #9d3ec6; /* Color sólido al pasar el ratón */
-      transform: translateY(-2px); /* Ligero levantamiento */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transform: translateY(-1px); /* Ligero levantamiento */
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
     }
 
     /* Sección de búsqueda */
     .busqueda {
       display: flex;
-      flex-direction: row; /* Asegura que estén en fila */
+      flex-direction: row;
       align-items: center;
       justify-content: center;
-      gap: 15px; /* Espacio entre elementos de búsqueda */
-      max-width: 600px; /* Ancho máximo para la sección de búsqueda */
-      margin: 25px auto; /* Más margen */
-      padding: 15px;
+      gap: 10px; /* Espacio entre elementos de búsqueda */
+      max-width: 500px; /* Ancho máximo más ajustado */
+      margin: 20px auto; /* Margen */
+      padding: 12px; /* Reducido el padding */
       background-color: rgba(255, 255, 255, 0.7);
-      border-radius: 15px;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+      border-radius: 12px;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+      flex-wrap: wrap;
     }
 
     .busqueda input {
-      flex-grow: 1; /* Permite que el input crezca */
-      min-width: 180px; /* Ancho mínimo para el input */
+      flex-grow: 1;
+      min-width: 150px; /* Ancho mínimo para el input */
     }
 
     /* Resultado de búsqueda */
     #resultadoBusqueda {
       text-align: center;
-      margin-top: 15px; /* Más margen superior */
-      font-size: 1.1em;
+      margin-top: 10px; /* Margen superior */
+      font-size: 1em;
       font-weight: bold;
-      padding: 8px 15px;
-      border-radius: 8px;
-      background-color: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(3px);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      display: inline-block; /* Para que el fondo y el padding se apliquen correctamente */
+      padding: 6px 12px; /* Reducido el padding */
+      border-radius: 6px;
+      background-color: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(2px);
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+      display: inline-block;
     }
 
     /* Botón de registrar mesa */
-    .body > div:first-of-type button {
+    body > div:first-of-type button {
       background-color: #681788; /* Color principal para el botón de registro */
-      font-size: 1.1em;
-      padding: 12px 25px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      font-size: 1em;
+      padding: 10px 20px; /* Reducido el padding */
+      border-radius: 8px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .body > div:first-of-type button:hover {
+    body > div:first-of-type button:hover {
       background-color: #4b0e60;
-      transform: translateY(-3px);
+      transform: translateY(-2px);
     }
 
     /* MODAL */
@@ -222,49 +221,49 @@
       width: 100%;
       height: 100%;
       overflow: auto;
-      background-color: rgba(0, 0, 0, 0.7); /* Fondo más oscuro para el modal */
-      animation: fadeIn 0.3s ease-out; /* Animación de entrada */
+      background-color: rgba(0, 0, 0, 0.6); /* Fondo más suave para el modal */
+      animation: fadeIn 0.3s ease-out;
     }
 
     .modal-contenido {
       background-color: #fff;
-      margin: 80px auto; /* Margen superior ajustado para centrar mejor */
-      padding: 30px; /* Más padding */
-      border-radius: 15px; /* Más redondeado */
-      max-width: 480px; /* Ancho máximo ligeramente mayor */
+      margin: 60px auto; /* Margen superior ajustado para centrar mejor */
+      padding: 25px; /* Reducido el padding */
+      border-radius: 12px; /* Más redondeado */
+      max-width: 400px; /* Ancho máximo más ajustado */
       position: relative;
       display: flex;
       flex-direction: column;
-      gap: 20px; /* Más espacio entre elementos */
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Sombra más profunda para el modal */
-      animation: slideIn 0.3s ease-out; /* Animación de entrada */
+      gap: 15px; /* Reducido el espacio entre elementos */
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Sombra más sutil para el modal */
+      animation: slideIn 0.3s ease-out;
     }
 
     .cerrar {
       position: absolute;
-      top: 15px; /* Ajuste de posición */
-      right: 20px; /* Ajuste de posición */
-      font-size: 28px; /* Tamaño de fuente más grande */
+      top: 10px; /* Ajuste de posición */
+      right: 15px; /* Ajuste de posición */
+      font-size: 24px; /* Tamaño de fuente más pequeño */
       cursor: pointer;
-      color: #888; /* Color más suave */
+      color: #aaa; /* Color más suave */
       transition: color 0.2s ease;
     }
 
     .cerrar:hover {
-      color: #333; /* Más oscuro al pasar el ratón */
+      color: #555; /* Más oscuro al pasar el ratón */
     }
 
     .titulo {
       text-align: center;
-      font-size: 24px; /* Título más grande en el modal */
+      font-size: 20px; /* Título más pequeño en el modal */
       font-weight: bold;
       color: #681788;
-      background-color: rgba(255, 255, 255, 0.8); /* Fondo más opaco */
-      padding: 15px 25px; /* Más padding */
-      border-radius: 12px; /* Más redondeado */
-      backdrop-filter: blur(4px);
-      margin-bottom: 15px; /* Más margen inferior */
-      border-bottom: 2px solid #681788; /* Línea inferior para el título */
+      background-color: rgba(255, 255, 255, 0.7); /* Fondo más opaco */
+      padding: 10px 20px; /* Reducido el padding */
+      border-radius: 10px; /* Más redondeado */
+      backdrop-filter: blur(3px);
+      margin-bottom: 10px; /* Reducido el margen inferior */
+      border-bottom: 1px solid #681788; /* Línea inferior más delgada para el título */
     }
 
     /* Animaciones */
@@ -274,7 +273,7 @@
     }
 
     @keyframes slideIn {
-      from { transform: translateY(-50px); opacity: 0; }
+      from { transform: translateY(-30px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
   </style>
